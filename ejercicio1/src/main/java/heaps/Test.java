@@ -24,11 +24,17 @@ public class Test {
         myHeap.enqueue(35);
         System.out.println(myHeap);
 
+        System.out.println(myHeap.front());
+        System.out.println(myHeap.back());
+
         System.out.println(myHeap.dequeue());
         System.out.println(myHeap);
         System.out.println(myHeap.dequeue());
         System.out.println(myHeap);
         System.out.println(myHeap.dequeue());
         System.out.println(myHeap);
+        
+        System.out.println(myHeap.front());
+        System.out.println(myHeap.back());
     }
 }

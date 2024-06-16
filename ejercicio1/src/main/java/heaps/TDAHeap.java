@@ -15,7 +15,6 @@ public class TDAHeap<T extends Comparable<T>> implements Heap<T> {
     public void enqueue(T x){
         this.data.add(x);
         T aux;
-        System.out.println(data.size());
 
         for(int i = this.data.size() - 1; i > 0 && this.data.get(i).compareTo(this.data.get(i/2)) > 0; i /= 2){
             aux = this.data.get(i);
@@ -49,11 +48,11 @@ public class TDAHeap<T extends Comparable<T>> implements Heap<T> {
     }
 
     public T front(){
-        return (T) new Object();
+        return this.data.get(0);
     }
 
     public T back(){
-        return (T) new Object();
+        return this.data.get(this.data.size()-1);
     }
 
     public String toString(){
