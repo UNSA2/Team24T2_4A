@@ -32,11 +32,11 @@ public class TDAHeap<T extends Comparable<T>> implements Heap<T> {
         T aux = this.data.get(0);
         this.data.set(0, this.data.remove(this.data.size() - 1));
         
-        int i = 1;
-        while(i * 2 < this.data.size()){
+        int i = 0;
+        while(i * 2 + 1 < this.data.size()){
             int j = 2 * i + 1;
-            if(j + 1 <= this.data.size() && this.data.get(j+1).compareTo(this.data.get(j)) > 0)
-                j = j + 1;
+            if(j + 1 < this.data.size() && this.data.get(j+1).compareTo(this.data.get(j)) > 0)
+                j++;
             if(this.data.get(i).compareTo(this.data.get(j)) > 0){
                 break;
             }

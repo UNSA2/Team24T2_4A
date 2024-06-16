@@ -23,5 +23,12 @@ public class Test {
         System.out.println(myHeap);
         myHeap.enqueue(35);
         System.out.println(myHeap);
+
+        System.out.println(myHeap.dequeue());
+        System.out.println(myHeap);
+        System.out.println(myHeap.dequeue());
+        System.out.println(myHeap);
+        System.out.println(myHeap.dequeue());
+        System.out.println(myHeap);
     }
 }
