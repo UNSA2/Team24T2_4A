@@ -25,7 +25,27 @@ public class TDAHeap<T extends Comparable<T>> implements Heap<T> {
     }
 
     public T dequeue(){
-        return (T) new Object();
+        if(this.data.size() == 0){
+            return null;
+        }
+
+        T aux = this.data.get(0);
+        this.data.set(0, this.data.remove(this.data.size() - 1));
+        
+        int i = 1;
+        while(i * 2 < this.data.size()){
+            int j = 2 * i + 1;
+            if(j + 1 <= this.data.size() && this.data.get(j+1).compareTo(this.data.get(j)) > 0)
+                j = j + 1;
+            if(this.data.get(i).compareTo(this.data.get(j)) > 0){
+                break;
+            }
+            T temp = this.data.get(i);
+            this.data.set(i, this.data.get(j));
+            this.data.set(j, temp);
+            i = j;
+        }
+        return aux;
     }
 
     public T front(){

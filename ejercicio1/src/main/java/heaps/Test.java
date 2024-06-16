@@ -15,5 +15,13 @@ public class Test {
         System.out.println(myHeap);
         myHeap.enqueue(8);
         System.out.println(myHeap);
+        myHeap.enqueue(17);
+        System.out.println(myHeap);
+        myHeap.enqueue(-9);
+        System.out.println(myHeap);
+        myHeap.enqueue(2);
+        System.out.println(myHeap);
+        myHeap.enqueue(35);
+        System.out.println(myHeap);
     }
 }
