@@ -2,9 +2,6 @@ package heaps;
 import interfaces.Heap;
 import java.util.ArrayList;
 
-//Linea agregada para probar la clase sin que cause conflictos con los placeholders
-@SuppressWarnings("unchecked")
-
 public class TDAHeap<T extends Comparable<T>> implements Heap<T> {
     ArrayList<T> data;
 
