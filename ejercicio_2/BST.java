@@ -1,92 +1,76 @@
 package ejercicio_2;
-//search()--, getMin(), getMax(), parent(), son(), insert()
 
-public class BST<T extends Comparable<T>> {
-    private Node<T> head;
+public class BST<K extends Comparable<K>, V> implements Diccionary<K, V> {
+    protected Node<K, V> root;
 
-    public Node<T> getHead (){return this.head;}
-    public void setHead (Node<T> head){this.head = head;}
-
-    public BST(){
-        this.head = null;
+    public void insert(K key, V value) {
+        root = insertRec(root, key, value);
     }
 
-    public T search(T x){
-        Node<T> res = searchNode(x, head);
-        return res.data;
-    }
-    protected Node<T> searchNode(T x, Node<T> n){
-        if (n == null) return null; //el nodo sea null (no encontro)
-        
-        int com = n.data.compareTo(x); //verifica si es menor o mayor o igual
-        if (com < 0) return searchNode(x, n.right); //     n < x
-        else if (com > 0) return searchNode(x, n.left); // n > x
-        
-        return n; // n = x  (encontro)
-        
-    }
-    public T getMin(T x){
-        if (head == null)   return null;
-
-        Node<T> aux = head;
-        while (aux.left != null) {
-            aux = aux.left;
+    protected Node<K, V> insertRec(Node<K, V> node, K key, V value) {
+        if (node == null) {
+            return new Node<>(key, value);
         }
-        return aux.data;
-    }
-    
-    public T getMax(T x){
-        if (head == null)   return null;
-        
-        Node<T> aux = head;
-        while (aux.right != null) {
-            aux = aux.right;
+        if (key.compareTo(node.getKey()) < 0) {
+            node.setLeft(insertRec(node.getLeft(), key, value));
+        } else if (key.compareTo(node.getKey()) > 0) {
+            node.setRight(insertRec(node.getRight(), key, value));
+        } else {
+            node.setValue(value);
         }
-        return aux.data;
-    }
-    public Node<T> parent(T data){
-        if (head == null || data.compareTo((T)head.data) == 0) {
-            return null;
-        }
-        return searParentNode(data, head);
-    }
-    protected Node<T> searParentNode(T data, Node<T> node){
-        if (node.left != null && data.compareTo(node.left.data) == 0 || node.right != null && data.compareTo(node.right.data) == 0) {
-            return node;//verifica que sea el hijo del padre y retorna el padre
-        }
-        if (node.data.compareTo(data) > 0 && node.left != null) { //va a la izquierda si no es null
-            return searParentNode(data, node.left);
-        } else if (node.data.compareTo(data) < 0 && node.right != null) { //va a la derecha si no es null
-            return searParentNode(data, node.right);
-        }
-        return null;
-
-    }
-
-    public boolean son(T data){ //verifica si tiene hijos
-        Node<T> res = searchNode(data, head);
-        if(res == null)
-            return false;
-        return true;
-    }
-
-    public void insert(T data) {
-        head = insertNode(head, data);
-    }
-    
-    private Node<T> insertNode(Node<T> node, T data) {
-        if (node == null)  return new Node<>(data);
-
-        int com = data.compareTo(node.data);
-        if (com < 0) node.left = insertNode(node.left, data);
-        else if (com > 0) node.right = insertNode(node.right, data);
-        
         return node;
     }
 
-    public boolean isEmpty(){
-        return head==null;
+    public V search(K key) {
+        return searchRec(root, key);
     }
 
+    protected V searchRec(Node<K, V> node, K key) {
+        if (node == null || key.equals(node.getKey())) {
+            return node != null ? node.getValue() : null;
+        }
+        if (key.compareTo(node.getKey()) < 0) {
+            return searchRec(node.getLeft(), key);
+        } else {
+            return searchRec(node.getRight(), key);
+        }
+    }
 
+    public void remove(K key) {
+        root = removeRec(root, key);
+    }
+
+    protected Node<K, V> removeRec(Node<K, V> node, K key) {
+        if (node == null) {
+            return null;
+        }
+        if (key.compareTo(node.getKey()) < 0) {
+            node.setLeft(removeRec(node.getLeft(), key));
+        } else if (key.compareTo(node.getKey()) > 0) {
+            node.setRight(removeRec(node.getRight(), key));
+        } else {
+            if (node.getLeft() == null) {
+                return node.getRight();
+            } else if (node.getRight() == null) {
+                return node.getLeft();
+            }
+            Node<K, V> temp = minValueNode(node.getRight());
+            node.setKey(temp.getKey());
+            node.setValue(temp.getValue());
+            node.setRight(removeRec(node.getRight(), temp.getKey()));
+        }
+        return node;
+    }
+
+    protected Node<K, V> minValueNode(Node<K, V> node) {
+        Node<K, V> current = node;
+        while (current.getLeft() != null) {
+            current = current.getLeft();
+        }
+        return current;
+    }
+
+    public boolean isEmpty() {
+        return root == null;
+    }
 }

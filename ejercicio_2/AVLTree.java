@@ -1,147 +1,76 @@
 package ejercicio_2;
-public class AVLTree<E extends Comparable<E>> extends BST<E> {
-	class NodeAVL extends Node<E>{
-		protected int fb;
-		public NodeAVL(E data) {
-			super(data);
-			this.fb = 0;
-		}
-		public String toString() {
-			return super.toString() + "(" + this.fb + ")";
-		}
-		
-	}
-	private boolean fl;//balance
-	public AVLTree(){ 
-			super();
-	}
-	
-	public void insert(E x){
-		this.fl = false;
-		this.setHead(insertRecAVL(x, (NodeAVL)this.getHead()));		
-	}
-		
-    private Node<E> insertRecAVL(E x, NodeAVL actual) {
-        NodeAVL aux = actual;
-        if (actual == null) {
-            this.fl = true;
-            aux = new NodeAVL(x);
-        } else {
-            int resC = actual.getData().compareTo(x);
-            if (resC == 0) {
-                System.out.println("El dato " + x + " ya fue insertado antes...");
-            } else if (resC < 0) { 
-                aux.setRight(insertRecAVL(x, (NodeAVL)actual.getRight()));
-                if (fl) {
-                    switch (aux.fb) {
-                        case -1: aux.fb = 0; 
-                                 this.fl = false; 
-                                 break;
-                        case 0:  aux.fb = 1; 
-                                 this.fl = true; 
-                                 break;
-                        case 1:  aux = balanceToLeft(aux);
-                                 this.fl = false; 
-                                 break;
-                    }
-                }
-            } else { 
-                aux.setLeft(insertRecAVL(x, (NodeAVL)actual.getLeft()));
-                if (fl) {
-                    switch (aux.fb) {
-                        case 1:  aux.fb = 0; 
-                                 this.fl = false; 
-                                 break;
-                        case 0:  aux.fb = -1; 
-                                 this.fl = true; 
-                                 break;
-                        case -1: aux = balanceToRight(aux);
-                                 this.fl = false; 
-                                 break;
-                    }
-                }
-            }
-        }
-        return aux;
+
+public class AVLTree<K extends Comparable<K>, V> extends BST<K, V> {
+
+    protected Node<K, V> insertRec(Node<K, V> node, K key, V value) {
+        node = super.insertRec(node, key, value);
+        return balance(node);
     }
 
-	private NodeAVL balanceToLeft(NodeAVL node) {
-		NodeAVL son = (NodeAVL)node.getRight();
-		switch(son.fb) {
-		case 1 : node.fb = 0;
-				 son.fb = 0;
-				 node = rotateSL(node);
-				 break;
-		case -1 :
-				NodeAVL grandSon = (NodeAVL)son.getLeft(); 
-				switch(grandSon.fb) {
-				case -1: node.fb = 0; son.fb = 1; break; 
-				case 0: node.fb = 0; son.fb = 0; break; 
-				case 1: node.fb = 1; son.fb = 0; break;
-				}
-				grandSon.fb = 0;
-				node.setRight(rotateSR(son));
-				node = rotateSL(node);
-				break;
-		}
-		return node;
-	}
-    private NodeAVL balanceToRight(NodeAVL node) {
-        NodeAVL son = (NodeAVL)node.getLeft();
-        switch (son.fb) {
-        case -1: node.fb = 0;
-                 son.fb = 0;
-                 node = rotateSR(node);
-                 break;
-        case 1:
-            NodeAVL grandSon = (NodeAVL)son.getRight();
-            switch (grandSon.fb) {
-                case 1:  node.fb = 0; 
-                         son.fb = -1; 
-                         break; 
-                case 0:  node.fb = 0; 
-                        son.fb = 0; 
-                        break; 
-                case -1: node.fb = -1; 
-                        son.fb = 0; 
-                         break;
-            }
-            grandSon.fb = 0;
-            node.setLeft(rotateSL(son));
-            node = rotateSR(node);
-            break;
+    protected Node<K, V> removeRec(Node<K, V> node, K key) {
+        node = super.removeRec(node, key);
+        if (node != null) {
+            node = balance(node);
         }
         return node;
     }
 
-	
-	private NodeAVL rotateSL(NodeAVL node) {//izquierda
-		NodeAVL son = (NodeAVL)node.getRight();
-		node.setRight(son.getLeft());
-		son.setLeft(node);
-		node = son;
-		return node;
-	}
-	
-	private NodeAVL rotateSR(NodeAVL node) {//derecha
-		NodeAVL son = (NodeAVL)node.getLeft();
-		node.setLeft(son.getRight());
-		son.setRight(node);
-		node = son;
-		return node;
-	}
-	
-	public void inOrden(){
-		if (this.isEmpty())
-			System.out.println("Arbol esta vacio....");
-		else
-			inOrden((NodeAVL)this.getHead());
-		System.out.println();
-	}
+    private Node<K, V> balance(Node<K, V> node) {
+        updateHeight(node);
+        int balanceFactor = getBalance(node);
 
-	protected void inOrden(NodeAVL actual){
-		if (actual.getLeft() != null) inOrden((NodeAVL)actual.getLeft());
-		System.out.print(actual+", ");
-		if (actual.getRight() != null) inOrden((NodeAVL)actual.getRight());
-	}	
+        if (balanceFactor > 1) {
+            if (getBalance(node.getLeft()) < 0) {
+                node.setLeft(rotateLeft(node.getLeft()));
+            }
+            return rotateRight(node);
+        }
+
+        if (balanceFactor < -1) {
+            if (getBalance(node.getRight()) > 0) {
+                node.setRight(rotateRight(node.getRight()));
+            }
+            return rotateLeft(node);
+        }
+
+        return node;
+    }
+
+    private void updateHeight(Node<K, V> node) {
+        node.setHeight(1 + Math.max(height(node.getLeft()), height(node.getRight())));
+    }
+
+    private int height(Node<K, V> node) {
+        return node == null ? 0 : node.getHeight();
+    }
+
+    private int getBalance(Node<K, V> node) {
+        return node == null ? 0 : height(node.getLeft()) - height(node.getRight());
+    }
+
+    private Node<K, V> rotateRight(Node<K, V> y) {
+        Node<K, V> x = y.getLeft();
+        Node<K, V> T2 = x.getRight();
+
+        x.setRight(y);
+        y.setLeft(T2);
+
+        updateHeight(y);
+        updateHeight(x);
+
+        return x;
+    }
+
+    private Node<K, V> rotateLeft(Node<K, V> x) {
+        Node<K, V> y = x.getRight();
+        Node<K, V> T2 = y.getLeft();
+
+        y.setLeft(x);
+        x.setRight(T2);
+
+        updateHeight(x);
+        updateHeight(y);
+
+        return y;
+    }
 }
