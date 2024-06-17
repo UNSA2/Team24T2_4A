@@ -2,26 +2,26 @@ package heaps;
 
 import java.util.ArrayList;
 
-public class PriorityQueueHeap<T extends Comparable<T>> extends TDAHeap<HeapNode<T>> {
+public class PriorityQueueHeap<E extends Comparable<E>> extends TDAHeap<HeapNode<E>> {
 
     public PriorityQueueHeap(){
-        this.setData(new ArrayList<HeapNode<T>>());
+        this.setData(new ArrayList<HeapNode<E>>());
     }
 
-    public void enqueue(T x, int priority){
-        HeapNode<T> newNode = new HeapNode<T>(x, priority);
+    public void enqueue(E x, int priority){
+        HeapNode<E> newNode = new HeapNode<E>(x, priority);
         super.enqueue(newNode);
     }
 
-    public T dequeue(){
+    public HeapNode<E> dequeue(){
         return super.dequeue();
     }
 
-    public T front(){
+    public HeapNode<E> front(){
         return super.front();
     }
 
-    public T back(){
+    public HeapNode<E> back(){
         return super.back();
     }
 

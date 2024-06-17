@@ -24,7 +24,7 @@ public class Test {
         myHeap.enqueue("str9", 35);
         System.out.println(myHeap);
 
-        /*System.out.println(myHeap.front());
+        System.out.println(myHeap.front());
         System.out.println(myHeap.back());
 
         System.out.println(myHeap.dequeue());
@@ -35,6 +35,6 @@ public class Test {
         System.out.println(myHeap);
         
         System.out.println(myHeap.front());
-        System.out.println(myHeap.back());*/
+        System.out.println(myHeap.back());
     }
 }
