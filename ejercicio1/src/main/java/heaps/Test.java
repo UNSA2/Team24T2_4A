@@ -2,7 +2,7 @@ package heaps;
 
 public class Test {
     public static void main(String[] args) {
-        TDAHeap<Integer> myHeap = new TDAHeap<Integer>();
+        TDAHeap<Integer> myHeap = new PriorityQueueHeap<Integer>();
         
         System.out.println(myHeap);
         myHeap.enqueue(5);

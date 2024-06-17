@@ -1,17 +1,14 @@
 package heaps;
 
-public class PriorityQueueHeap<T extends Comparable<T>> extends TDAHeap<T> {
+import java.util.ArrayList;
 
-    //Para este problema, dequeue no varia, pero para enqueue, aunque se puede modificar
-    //para que ordene por prioridad al insertar, a la hora de reordenar el heap, no es posible
-    //si no se guarda la prioridad de cada elemento
-    //Por lo tanto, lo mas apropiado probablemente sea utilizar un Node especifico que guarde el dato y la prioridad
+public class PriorityQueueHeap<T extends Comparable<T>> extends TDAHeap<HeapNode<T>> {
 
     public PriorityQueueHeap(){
-        super();
+        this.setData(new ArrayList<HeapNode<T>>());
     }
 
-    public void enqueue(T x){
+    public void enqueue(T x, int priority){
         enqueue(x);
     }
 

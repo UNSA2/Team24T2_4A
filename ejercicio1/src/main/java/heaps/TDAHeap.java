@@ -59,4 +59,8 @@ public class TDAHeap<T extends Comparable<T>> implements Heap<T> {
         }
         return str;
     }
+
+    protected void setData(ArrayList<T> data){
+        this.data = data;
+    }
 }

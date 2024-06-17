@@ -16,4 +16,8 @@ public class HeapNode<E extends Comparable<E>> implements Comparable<HeapNode<E>
         return this.priority;
     }
 
+    public String toString(){
+        return this.data.toString();
+    }
+
 }
