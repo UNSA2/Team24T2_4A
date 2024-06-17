@@ -8,6 +8,16 @@ public class PriorityQueueHeap<E extends Comparable<E>> extends TDAHeap<HeapNode
         this.setData(new ArrayList<HeapNode<E>>());
     }
 
+    //La intencion original era hacer
+    //public T dequeue(){
+    //    HeapNode<T> node = super.dequeue();
+    //    if (node != null) {
+    //        return node.getData();
+    //    }
+    //    return null;
+    //}
+    //Pero debido a problemas con los tipos de datos de retorno, no se pudo implementar
+    
     public void enqueue(E x, int priority){
         HeapNode<E> newNode = new HeapNode<E>(x, priority);
         super.enqueue(newNode);

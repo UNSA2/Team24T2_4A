@@ -5,23 +5,23 @@ public class Test {
         PriorityQueueHeap<String> myHeap = new PriorityQueueHeap<String>();
         
         System.out.println(myHeap);
-        myHeap.enqueue("str1", 5);
+        myHeap.enqueue("Juan", 5);
         System.out.println(myHeap);
-        myHeap.enqueue("str2", 10);
+        myHeap.enqueue("Maria", 10);
         System.out.println(myHeap);
-        myHeap.enqueue("str3", 12);
+        myHeap.enqueue("Anelhi", 12);
         System.out.println(myHeap);
-        myHeap.enqueue("str4", -6);
+        myHeap.enqueue("Angely", -6);
         System.out.println(myHeap);
-        myHeap.enqueue("str5", 8);
+        myHeap.enqueue("Marina", 8);
         System.out.println(myHeap);
-        myHeap.enqueue("str6", 17);
+        myHeap.enqueue("Johan", 17);
         System.out.println(myHeap);
-        myHeap.enqueue("str7", -9);
+        myHeap.enqueue("Aaron", -9);
         System.out.println(myHeap);
-        myHeap.enqueue("str8", 2);
+        myHeap.enqueue("Mylen", 2);
         System.out.println(myHeap);
-        myHeap.enqueue("str9", 35);
+        myHeap.enqueue("Albieri", 35);
         System.out.println(myHeap);
 
         System.out.println(myHeap.front());

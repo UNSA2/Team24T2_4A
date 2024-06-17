@@ -22,7 +22,7 @@ public class HeapNode<E extends Comparable<E>> implements Comparable<HeapNode<E>
     }
 
     public String toString(){
-        return this.data.toString() +" "+ priority;
+        return this.data.toString();
     }
 
 }
