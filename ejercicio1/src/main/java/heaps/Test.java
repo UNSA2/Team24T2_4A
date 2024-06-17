@@ -2,29 +2,29 @@ package heaps;
 
 public class Test {
     public static void main(String[] args) {
-        TDAHeap<Integer> myHeap = new PriorityQueueHeap<Integer>();
+        PriorityQueueHeap<String> myHeap = new PriorityQueueHeap<String>();
         
         System.out.println(myHeap);
-        myHeap.enqueue(5);
+        myHeap.enqueue("str1", 5);
         System.out.println(myHeap);
-        myHeap.enqueue(10);
+        myHeap.enqueue("str2", 10);
         System.out.println(myHeap);
-        myHeap.enqueue(12);
+        myHeap.enqueue("str3", 12);
         System.out.println(myHeap);
-        myHeap.enqueue(-6);
+        myHeap.enqueue("str4", -6);
         System.out.println(myHeap);
-        myHeap.enqueue(8);
+        myHeap.enqueue("str5", 8);
         System.out.println(myHeap);
-        myHeap.enqueue(17);
+        myHeap.enqueue("str6", 17);
         System.out.println(myHeap);
-        myHeap.enqueue(-9);
+        myHeap.enqueue("str7", -9);
         System.out.println(myHeap);
-        myHeap.enqueue(2);
+        myHeap.enqueue("str8", 2);
         System.out.println(myHeap);
-        myHeap.enqueue(35);
+        myHeap.enqueue("str9", 35);
         System.out.println(myHeap);
 
-        System.out.println(myHeap.front());
+        /*System.out.println(myHeap.front());
         System.out.println(myHeap.back());
 
         System.out.println(myHeap.dequeue());
@@ -35,6 +35,6 @@ public class Test {
         System.out.println(myHeap);
         
         System.out.println(myHeap.front());
-        System.out.println(myHeap.back());
+        System.out.println(myHeap.back());*/
     }
 }

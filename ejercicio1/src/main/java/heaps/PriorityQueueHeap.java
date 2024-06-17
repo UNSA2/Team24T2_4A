@@ -9,7 +9,8 @@ public class PriorityQueueHeap<T extends Comparable<T>> extends TDAHeap<HeapNode
     }
 
     public void enqueue(T x, int priority){
-        enqueue(x);
+        HeapNode<T> newNode = new HeapNode<T>(x, priority);
+        super.enqueue(newNode);
     }
 
     public T dequeue(){
