@@ -1,7 +1,5 @@
 package heaps;
 
-import java.util.ArrayList;
-
 public class PriorityQueueHeap<T extends Comparable<T>> extends TDAHeap<T> {
 
     //Para este problema, dequeue no varia, pero para enqueue, aunque se puede modificar
@@ -10,7 +8,7 @@ public class PriorityQueueHeap<T extends Comparable<T>> extends TDAHeap<T> {
     //Por lo tanto, lo mas apropiado probablemente sea utilizar un Node especifico que guarde el dato y la prioridad
 
     public PriorityQueueHeap(){
-        this.data = new ArrayList<T>();
+        super();
     }
 
     public void enqueue(T x){

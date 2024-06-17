@@ -3,7 +3,7 @@ import interfaces.Heap;
 import java.util.ArrayList;
 
 public class TDAHeap<T extends Comparable<T>> implements Heap<T> {
-    ArrayList<T> data;
+    private ArrayList<T> data;
 
     public TDAHeap(){
         this.data = new ArrayList<T>();
